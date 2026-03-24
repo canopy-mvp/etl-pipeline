@@ -1,0 +1,11 @@
+{
+  "name": "@canopy-mvp/etl-pipeline",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "lint": "eslint src/"
+  },
+  "dependencies": {}
+}

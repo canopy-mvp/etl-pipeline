@@ -1,2 +1,10 @@
 # etl-pipeline
-Data extraction, transformation, and loading pipelines
+
+ETL pipelines for data warehouse ingestion
+
+## Getting Started
+
+```bash
+npm install
+npm run build
+```
