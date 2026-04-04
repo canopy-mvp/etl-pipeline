@@ -1,0 +1,27 @@
+---
+description: Architecture & pattern standards from Canopy (canopy-mvp, locked)
+globs:
+alwaysApply: true
+---
+
+# Architecture & Patterns
+
+## Error Handling
+
+<!-- Source: canopy-mvp (org) -->
+### No silent error swallowing
+NEVER use empty catch blocks, bare `except: pass`, or `.catch(() => {})`. Every catch MUST handle the error (retry/fallback/log with context), re-throw it, or add a comment explaining why it's safe to ignore. Example: `catch(e) { logger.error('Payment retry', {orderId, error: e}); }` instead of `catch(e) {}`.
+
+## Testing
+
+<!-- Source: canopy-mvp (org) -->
+### Tests required for new logic
+ALWAYS write tests for new functions, endpoints, or behavioral changes. Minimum: one happy-path test, one error case, one boundary condition. Place tests in the project's established test directory using its framework.
+
+<!-- Source: canopy-mvp (org) -->
+## input validation
+MUST validate all inputs (query, body, path) with Zod schemas before processing. Example: `z.object({reference_id: z.string().uuid()})`. Reject invalid requests with 400 errors.
+
+<!-- Source: canopy-mvp (org) -->
+## repository pattern
+MUST use repository classes (e.g., `WebhookRepository`, `ChargeRepository`) for all database access. NEVER call Prisma directly in service code. Example: inject `WebhookRepository` into service, call `repository.create()` instead of `prisma.webhook.create()`.
